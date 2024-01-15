@@ -32,7 +32,7 @@ function GoogleMap() {
         >
           <StyledMarker>
             <img src={localization} className="MarkerImg" />
-      STREET WOK</StyledMarker>
+      casavietnam</StyledMarker>
 
         </Marker>
       </GoogleMapReact>

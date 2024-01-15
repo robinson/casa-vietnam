@@ -18,12 +18,12 @@ const Gallery = ({ location }) => {
 
   const { allDatoCmsAsset } = useStaticQuery(graphql`
   query gallery {
-    allDatoCmsAsset(filter: {tags: {eq: "gallery"}} sort: {fields: notes}) {
+    allDatoCmsAsset(filter: {tags: {eq: "gallery"}}) {
     edges {
       node {
         id
         fluid {
-          ...GatsbyDatoCmsFluid
+       ...GatsbyDatoCmsFluid
         }
       }
     }
@@ -32,7 +32,7 @@ const Gallery = ({ location }) => {
 ` )
   const { edges } = allDatoCmsAsset;
   return (
-    <Layout location={location} stick="stick" headerTitle="Gallery">
+    <Layout location={location} stick="stick" headerTitle="gallery">
       {console.log(edges)}
       <SEO title="Gallery" />
       <GalleryWrapper>

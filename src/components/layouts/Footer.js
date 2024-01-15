@@ -9,7 +9,7 @@ const pages = [
   { name: 'Feedback', path: 'Feedback', },
   { name: 'Careers', path: 'Careers', },
   { name: 'Privacy', path: 'Privacy', },
-  { name: 'Copyright WOK@', path: 'Copyright', },
+  { name: 'Copyright @casavietnam', path: 'Copyright', },
 
 ]
 

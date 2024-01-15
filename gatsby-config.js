@@ -7,9 +7,9 @@ const path = require(`path`)
 
 module.exports = {
   siteMetadata: {
-    title: `casa vietnam`,
-    description: `Small street food restaurant that specialize in preparing food from a wok according to slow food philosophy and using only season ingredients  `,
-    author: `@casa vietnam`,
+    title: `casavietnam`,
+    description: `Il ristorante tradizionale vietnamita dove si possono gustare autentici sapori dal VietnamSmall street food restaurant that specialize in preparing food from a wok according to slow food philosophy and using only season ingredients  `,
+    author: `@gaperi`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,

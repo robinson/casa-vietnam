@@ -7,8 +7,8 @@ import { above, grey, skyblue, } from '../utilities'
 
 
 const getSocial = [
-    { icon: ['fab', 'facebook-f'], url: 'https://www.facebook.com', },
-    { icon: ['fab', 'instagram'], url: 'https://www.instagram.com', },
+    { icon: ['fab', 'facebook-f'], url: 'https://www.facebook.com/p/CasaVietnam-100054888704799/', },
+    { icon: ['fab', 'instagram'], url: 'https://www.instagram.com/casavietnam/', },
     { icon: ['fab', 'youtube'], url: 'https://www.youtube.com', },
     { icon: ['fab', 'twitter'], url: 'https://www.twitter.com', },
 ]

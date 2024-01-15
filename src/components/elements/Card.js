@@ -97,8 +97,13 @@ transition: all .2s ease;
 ${headerFont};
 ${applyStyleModifiers(CARDHEADER_MODIFIERS)};
 `
-
-
+const CardFooter = styled.p`
+padding: 0 2rem 0 2rem;
+font-size: 1.2rem;
+font-weight:400;
+margin-top: 0;
+${textFont};
+`
 const CardBody = styled.p`
 padding: 0 2rem 0 2rem;
 font-size: 1.2rem;
@@ -120,3 +125,5 @@ Card.CardRowItem = CardRowItem;
 Card.CardButton = CardButton;
 
 Card.CardLinkButton = CardLinkButton;
+
+Card.CardFooter = CardFooter;

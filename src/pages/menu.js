@@ -14,28 +14,6 @@ import Image from '../components/image'
 import { ShowHideElement } from '../components/animations'
 
 const menu = ['Antipasto', 'Tagliatelle di riso', 'spagetti di riso', 'riso', 'piatti gevani', 'Panino vietnamita', 'Secondo', 'Contorni','Bevande', 'Dolce']
-const tags = [
-  {
-    name: 'vegan',
-    value: '#vegan_'
-  },
-  {
-    name: 'vegetarian',
-    value: '#vegetarian_'
-  },
-  {
-    name: 'diary free',
-    value: '#diaryfree_'
-  },
-  {
-    name: 'gluten free',
-    value: '#glutenfree_'
-  },
-  {
-    name: '<500 cal',
-    value: '#<500 cal_'
-  }
-]
 
 const StyledList = styled(animated.ul)`
 margin:0 0 5rem 0;
@@ -80,8 +58,6 @@ const StyledButtonList = ({ options, state, setState }) => {
 
   const trail = useTrail(options.length,
     {
-
-
       opacity: isVisible ? 1 : 0,
       y: isVisible ? 0 : 50,
       from: { opacity: 0, y: 50 },
@@ -133,22 +109,21 @@ const StyledSelectList = ({ options, setState, state }) => (
 
 )
 
-
-
 const MenuPage = ({ location }) => {
-  const { allDatoCmsAsset, allDatoCmsMenu } = useStaticQuery(graphql`
+  
+  const { cmsAsset, cmsMenu } = useStaticQuery(graphql`
   query menu {
-    allDatoCmsAsset(filter: {tags: {eq: "pho"}}) {
-    edges {
-      node {
-        id
-        fluid {
-          ...GatsbyDatoCmsFluid
+    cmsAsset: allDatoCmsAsset(filter: {tags: {eq: "pho"}}) {
+      edges {
+        node {
+          id
+          fluid {
+         ...GatsbyDatoCmsFluid
+          }
         }
       }
     }
-  }
-  allDatoCmsMenu {
+    cmsMenu: allDatoCmsMenu {
    edges {
      node {
       id
@@ -156,6 +131,7 @@ const MenuPage = ({ location }) => {
       category
       ingredients
       tag
+      price
      }
    }
  }
@@ -163,7 +139,7 @@ const MenuPage = ({ location }) => {
 ` )
 
   const windowWidth = useWindowSize().width;
-  const [menuOption, setMenuOption] = useState('starters')
+  const [menuOption, setMenuOption] = useState('Antipasto')
   const [checkedItems, setCheckedItems] = useState({})
 
 
@@ -195,8 +171,8 @@ const MenuPage = ({ location }) => {
     return false
   }
 
-  const { fluid } = allDatoCmsAsset.edges[0].node;
-  const { edges } = allDatoCmsMenu;
+  const { asset } = cmsAsset;
+  const { edges } = cmsMenu;
 
   return (
     <Layout location={location} stick="stick" headerTitle={"menu"}>
@@ -214,16 +190,15 @@ const MenuPage = ({ location }) => {
 
       {/* </ShowHideElement> */}
 
-
+      {console.log(asset)}
       <MenuWrapper>
-
         <MenuImage>
           <ShowHideElement cssProps={`
           width:100%;
           max-width:300px;
           margin: 0 2rem 0 0;
           `}>
-            <Image fluid={fluid} cssProps={`
+            <Image fluid={asset} cssProps={`
           width:100%;
           height:550px;
           `} />
@@ -234,9 +209,7 @@ const MenuPage = ({ location }) => {
           <Card css={`
             width:100%;
     `}>
-            <Card.CardMenu>
-              {tags.map(({ name, value }) => <Checkbox name={name} value={value} label={name} checked={checkedItems[name]} handleChange={handleCheckboxChange} />)}
-            </Card.CardMenu>
+           
             <Card.CardRow>
               {edges.map(({ node }) => {
                 const { category, tag } = node;
@@ -245,6 +218,7 @@ const MenuPage = ({ location }) => {
                     <Card.CardRowItem modifiers={anyIsTrue(checkedItems) ? !checkIfChecked(tag) && 'transparent' : ''}>
                       <Card.CardHeader modifiers={["textFont", "red", anyIsTrue(checkedItems) ? checkIfChecked(tag) && "green" : '']}>{node.name}</Card.CardHeader>
                       <Card.CardBody> {node.ingredients}</Card.CardBody>
+                      <Card.CardFooter>{node.price}</Card.CardFooter>
                     </Card.CardRowItem>
                   )
                 }
