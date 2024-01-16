@@ -23,12 +23,12 @@ function GoogleMap() {
     }}>
       <GoogleMapReact
         bootstrapURLKeys={{ key: process.env.GATSBY_GOOGLE_MAPS_API }}
-        defaultCenter={{ lat: 54.51, lng: 18.55 }}
+        defaultCenter={{ lat: 45.4913, lng: 9.1969 }}
         defaultZoom={15}
       >
         <Marker
-          lat="54.513008"
-          lng="18.550399"
+          lat="45.49130630493164"
+          lng="9.196946144104004"
         >
           <StyledMarker>
             <img src={localization} className="MarkerImg" />
