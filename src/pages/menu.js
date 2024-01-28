@@ -12,6 +12,8 @@ import { Button, Select, Card } from "../components/elements"
 import { Checkbox } from "../components/layouts"
 import Image from '../components/image'
 import { ShowHideElement } from '../components/animations'
+import menupdf from '../components/assets/Casa-Vietnam-Milano-2024.pdf'
+
 
 const menu = ['Antipasto', 'Tagliatelle di riso', 'spagetti di riso', 'riso', 'piatti gevani', 'Panino vietnamita', 'Secondo', 'Contorni','Bevande', 'Dolce']
 
@@ -111,7 +113,7 @@ const StyledSelectList = ({ options, setState, state }) => (
 
 const MenuPage = ({ location }) => {
   
-  const { cmsAsset, cmsMenu } = useStaticQuery(graphql`
+  const { cmsAsset, cmsMenu, cmsPdf } = useStaticQuery(graphql`
   query menu {
     cmsAsset: allDatoCmsAsset(filter: {tags: {eq: "pho"}}) {
       edges {
@@ -134,7 +136,16 @@ const MenuPage = ({ location }) => {
       price
      }
    }
- }
+   
+}
+cmsPdf: allDatoCmsAsset(filter: {tags: {eq: "menu"}}) {
+  edges {
+    node {
+      id
+      url
+    }
+  }
+}
 }
 ` )
 
@@ -173,7 +184,8 @@ const MenuPage = ({ location }) => {
 
   const { asset } = cmsAsset;
   const { edges } = cmsMenu;
-
+  const { pdf } = cmsPdf;
+ 
   return (
     <Layout location={location} stick="stick" headerTitle={"menu"}>
       <SEO title="Menu" />
@@ -191,6 +203,7 @@ const MenuPage = ({ location }) => {
       {/* </ShowHideElement> */}
 
       {console.log(asset)}
+      {console.log(pdf)}
       <MenuWrapper>
         <MenuImage>
           <ShowHideElement cssProps={`
@@ -219,7 +232,7 @@ const MenuPage = ({ location }) => {
                       <Card.CardHeader modifiers={["textFont", "red", anyIsTrue(checkedItems) ? checkIfChecked(tag) && "green" : '']}>{node.name}</Card.CardHeader>
                       <Card.CardBody> {node.ingredients}</Card.CardBody>
                       <Card.CardFooter>{node.price}</Card.CardFooter>
-                    </Card.CardRowItem>
+                    </Card.CardRowItem> 
                   )
                 }
               })}
@@ -227,7 +240,8 @@ const MenuPage = ({ location }) => {
           </Card>
         </ShowHideElement>
       </MenuWrapper>
-      <ShowHideElement><MenuButton>Download menu on PDF</MenuButton></ShowHideElement>
+      <ShowHideElement><MenuButton><a href={menupdf}>
+              Download menu on PDF</a></MenuButton></ShowHideElement>
     </Layout >
 
   )
